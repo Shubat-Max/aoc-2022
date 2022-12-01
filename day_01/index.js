@@ -16,7 +16,7 @@ const getTop3CarryingWeightSort = (weightData) => {
 }
 
 /* Dynamic programming approach */
-const getTop3CarryingWeight = (weightData) => {
+const getTop3CarryingWeightDP = (weightData) => {
   const strings = weightData.split(/\r\n/)
   strings.push('') // allow last iteration to finish
   const sums = [0,0,0,0]
@@ -44,18 +44,13 @@ const getTop3CarryingWeight = (weightData) => {
 (async () => {
   const weightData = await readFile('input.txt')
 
-  // const maxCarrying = getMaxCarryingWeight(weightData)
-  // console.log(maxCarrying)
-  //
-  console.time('getTop3CarryingWeight()')
-  const top3Carrying = getTop3CarryingWeight(weightData)
-  console.timeEnd('getTop3CarryingWeight()')
-  console.log(top3Carrying)
+  const maxCarrying = getMaxCarryingWeight(weightData)
+  console.log(maxCarrying)
 
-  console.time('getTop3CarryingWeightSort()')
+  const top3CarryingDP = getTop3CarryingWeightDP(weightData)
+  console.log(top3CarryingDP)
+
   const top3CarryingSort = getTop3CarryingWeightSort(weightData)
-  console.timeEnd('getTop3CarryingWeightSort()')
   console.log(top3CarryingSort)
-
 })()
 
