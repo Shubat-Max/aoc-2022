@@ -46,10 +46,14 @@ const getTotalScoreForOutcomeBasedGuide = (guide) => {
 (async () => {
   const guide = await readFile('input.txt')
 
+  console.time('getTotalScoreForShapeBasedGuide')
   const shapeBasedTotal = getTotalScoreForShapeBasedGuide(guide)
+  console.timeEnd('getTotalScoreForShapeBasedGuide')
   console.log('shapeBasedTotal:', shapeBasedTotal)
 
+  console.time('getTotalScoreForOutcomeBasedGuide')
   const outcomeBasedTotal = getTotalScoreForOutcomeBasedGuide(guide)
+  console.timeEnd('getTotalScoreForOutcomeBasedGuide')
   console.log('outcomeBasedTotal:', outcomeBasedTotal)
 })()
 

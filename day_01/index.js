@@ -1,5 +1,6 @@
 const fs = require('fs/promises')
 
+
 const readFile = async (filename) => {
   return await fs.readFile(filename, 'utf-8')
 }
@@ -38,7 +39,6 @@ const getTop3CarryingWeightDP = (weightData) => {
 
   return sums.reduce((t, s) => t += s, 0)
 }
-
 
 
 (async () => {
@@ -113,4 +113,3 @@ const getTop3CarryingWeightDP = (weightData) => {
 //
 // Find the top three Elves carrying the most Calories.
 // How many Calories are those Elves carrying in total?
-
