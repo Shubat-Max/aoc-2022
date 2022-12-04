@@ -5,6 +5,7 @@ const readFile = async (filename) => {
   return await fs.readFile(filename, 'utf-8')
 }
 
+/* Part 1 - getTotalJobsInclusion */
 const getTotalJobsInclusion = (jobs) => {
   return jobs
     .split(/\r?\n/)
