@@ -8,7 +8,7 @@ const readFile = async (filename) => {
 /* Part 1 - get total priority of common items in both compartments */
 const getCommonItemsPriorityPerBackpack = (backpacksContent) => {
   return backpacksContent
-    .split(/\r\n/)
+    .split(/\r?\n/)
     .map(row => {
       const leftCompartment = row.slice(0, Math.ceil(row.length / 2)).split("")
       const rightCompartment = row.slice(Math.ceil(row.length / 2)).split("")
@@ -22,7 +22,7 @@ const getCommonItemsPriorityPerBackpack = (backpacksContent) => {
 
 /* Part 1 - get total priority of common items in both compartments --OneLiner-- */
 const getCommonItemsPriorityPerBackpackOL = bC => bC
-  .split(/\r\n/)
+  .split(/\r?\n/)
   .map(r => [r.slice(0, Math.ceil(r.length / 2)).split(""), r.slice(Math.ceil(r.length / 2)).split("")])
   .map(([lC, rC]) => [...new Set(lC.filter(l => rC.includes(l)))].map(l => l.charCodeAt(0)).map(c => c >= 97 ? c - 96 : c - 38))
   .reduce((tp, p) => tp += p.reduce((trp, rp) => trp += rp, 0), 0);
@@ -30,7 +30,7 @@ const getCommonItemsPriorityPerBackpackOL = bC => bC
 /* Part 2 - get total priority of common items in 3 backpacks */
 const getCommonItemsPriorityPer3Backpacks = (backpacksContent) => {
   return backpacksContent
-    .split(/\r\n/)
+    .split(/\r?\n/)
     .reduce((tP, r, i, al) => {
       if(i % 3 !== 0) return tP // skip 2nd & 3rd steps since we are taking those values on first step
       const b1 = al[i].split(""),
@@ -46,7 +46,7 @@ const getCommonItemsPriorityPer3Backpacks = (backpacksContent) => {
 
 /* Part 2 - get total priority of common items in 3 backpacks --OneLiner-- */
 const getCommonItemsPriorityPer3BackpacksOL = bC => bC
-  .split(/\r\n/)
+  .split(/\r?\n/)
   .reduce((l, r, i, a) => l = i % 3 === 0 ? [...l, [a[i], a[i + 1], a[i + 2]]] : [...l], [])
   .map(l3 => [l3[0].split(""), l3[1].split(""), l3[2].split("")])
   .map(([a, b, c]) => [...new Set(a.filter(l => b.includes(l) && c.includes(l)))].map(l => l.charCodeAt(0)).map(ac => ac >= 97 ? ac - 96 : ac - 38))

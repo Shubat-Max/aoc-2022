@@ -7,22 +7,22 @@ const readFile = async (filename) => {
 
 /* Part 1 - Straight through approach */
 const getMaxCarryingWeight = (weightData) => {
-  return Math.max(...weightData.split(/\r\n\r\n/).map(s => s.split(/\r\n/).reduce((a, s) => a += Number.parseInt(s), 0)))
+  return Math.max(...weightData.split(/\r?\n\r?\n/).map(s => s.split(/\r\n/).reduce((a, s) => a += Number.parseInt(s), 0)))
 }
 
 /* Part 2 - Straight through approach via sort */
 const getTop3CarryingWeightSort = (weightData) => {
-  const sortedWeights = weightData.split(/\r\n\r\n/).map(s => s.split(/\r\n/).reduce((a, s) => a += Number.parseInt(s), 0)).sort((a, b) =>  a > b ? -1 : a < b ? 1 : 0)
+  const sortedWeights = weightData.split(/\r?\n\r?\n/).map(s => s.split(/\r\n/).reduce((a, s) => a += Number.parseInt(s), 0)).sort((a, b) =>  a > b ? -1 : a < b ? 1 : 0)
   return sortedWeights[0] + sortedWeights[1] + sortedWeights[2]
 }
 
 /* Part 2 - Dynamic programming approach */
 const getTop3CarryingWeightDP = (weightData) => {
-  const strings = weightData.split(/\r\n/)
+  const strings = weightData.split(/\r?\n/)
   strings.push('') // allow last iteration to finish
   const sums = [0,0,0,0]
   strings.forEach(s => {
-    const num = Number.parseInt(s)
+    const num = +s
     if(num){
       sums[0] += num
     } else {
@@ -44,13 +44,19 @@ const getTop3CarryingWeightDP = (weightData) => {
 (async () => {
   const weightData = await readFile('input.txt')
 
-  const maxCarrying = getMaxCarryingWeight(weightData)
+  console.time('getMaxCarryingWeight')
+  const maxCarrying = getMaxCarryingWeight(weightData) // exec time 0.3-0.4 ms
+  console.timeEnd('getMaxCarryingWeight')
   console.log(maxCarrying)
 
-  const top3CarryingDP = getTop3CarryingWeightDP(weightData)
+  console.time('getTop3CarryingWeightDP')
+  const top3CarryingDP = getTop3CarryingWeightDP(weightData) // exec time 0.6-0.7 ms
+  console.timeEnd('getTop3CarryingWeightDP')
   console.log(top3CarryingDP)
 
-  const top3CarryingSort = getTop3CarryingWeightSort(weightData)
+  console.time('getTop3CarryingWeightSort')
+  const top3CarryingSort = getTop3CarryingWeightSort(weightData) // exec time 0.8-0.9 ms
+  console.timeEnd('getTop3CarryingWeightSort')
   console.log(top3CarryingSort)
 })()
 

@@ -11,7 +11,7 @@ const getTotalScoreForShapeBasedGuide = (guide) => {
     .replace(/[AX]/g,'1')
     .replace(/[BY]/g,'2')
     .replace(/[CZ]/g,'3')
-    .split(/\r\n/)
+    .split(/\r?\n/)
     .map(
       row => +row[2] + (
         +row[0] === +row[2] ? 3
@@ -31,7 +31,7 @@ const getTotalScoreForOutcomeBasedGuide = (guide) => {
     .replace(/X/g,'0')
     .replace(/Y/g,'3')
     .replace(/Z/g,'6')
-    .split(/\r\n/)
+    .split(/\r?\n/)
     .map(
       row => +row[2] + (
         +row[2] === 3 ? +row[0]
@@ -47,12 +47,12 @@ const getTotalScoreForOutcomeBasedGuide = (guide) => {
   const guide = await readFile('input.txt')
 
   console.time('getTotalScoreForShapeBasedGuide')
-  const shapeBasedTotal = getTotalScoreForShapeBasedGuide(guide)
+  const shapeBasedTotal = getTotalScoreForShapeBasedGuide(guide) // exec time 1.2-1.3 ms
   console.timeEnd('getTotalScoreForShapeBasedGuide')
   console.log('shapeBasedTotal:', shapeBasedTotal)
 
   console.time('getTotalScoreForOutcomeBasedGuide')
-  const outcomeBasedTotal = getTotalScoreForOutcomeBasedGuide(guide)
+  const outcomeBasedTotal = getTotalScoreForOutcomeBasedGuide(guide) // exec time 0.9-1.0 ms
   console.timeEnd('getTotalScoreForOutcomeBasedGuide')
   console.log('outcomeBasedTotal:', outcomeBasedTotal)
 })()
