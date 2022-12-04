@@ -15,6 +15,7 @@ const getTotalJobsInclusion = (jobs) => {
     , 0)
 }
 
+/* Part 2 - getTotalJobsOverlapped */
 const getTotalJobsOverlapped = (jobs) => {
   return jobs
     .split(/\r?\n/)
